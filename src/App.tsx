@@ -33,6 +33,9 @@ function App() {
    }
 
    const handleScroll = (e: any) => {
+      // If no images, don't do anything
+      if (images.length === 0) return
+      
       // Get actual route
       const route = window.location.pathname
       const { offsetHeight, scrollTop, scrollHeight } = e.target

@@ -94,7 +94,7 @@ pub async fn fetch_image(subreddit: &str) -> Result<RedditImage, Box<dyn Error>>
 
 #[async_recursion]
 async fn fetch_image_recursive(subreddit: &str) -> Result<RedditImage, Box<dyn Error>> {
-    sleep(Duration::from_millis(500)).await;
+    // sleep(Duration::from_millis(500)).await;
     println!("Fetching image from {}", subreddit);
     // Create reqwest client
     let client = Client::new();
@@ -103,13 +103,20 @@ async fn fetch_image_recursive(subreddit: &str) -> Result<RedditImage, Box<dyn E
 
     let res = client
         .get(&url)
-        .header("User-Agent", "reddimg")
+        .header("User-Agent", "reddimg/0.0.1")
         .send()
         .await;
     let res = match res {
         Ok(res) => res,
         Err(_) => return fetch_image_recursive(subreddit).await,
     };
+
+    // If 429, wait 5 seconds and try again (429 Too Many Requests)
+    if res.status().as_u16() == 429 {
+        println!("429 Too Many Requests, waiting 5 seconds");
+        sleep(Duration::from_secs(5)).await;
+        return fetch_image_recursive(subreddit).await;
+    }
 
     let res = res.json::<Value>().await?;
 
@@ -170,6 +177,8 @@ pub async fn fetch_x_images(
         // Get random subreddit from subreddits
         let subreddit = subreddits.choose(&mut rand::thread_rng()).unwrap();
 
+        // Fetch image from subreddit
+        println!("X|Fetching image from {}", subreddit);
         let image = fetch_image(subreddit).await?;
 
         images.push(image);
