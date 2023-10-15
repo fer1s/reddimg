@@ -1,0 +1,43 @@
+.app_bar {
+    width: 100%;
+    height: 30px;
+    background: linear-gradient(-264deg, rgba(136, 136, 136, 0.03) 0%, rgba(51, 51, 51, 0.06) 100%);
+    backdrop-filter: blur(2.5px);
+ 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+ 
+    .app_bar__title {
+       margin-left: 10px;
+       font-size: 15px;
+       font-weight: 500;
+       opacity: 0.6;
+    }
+ 
+    .app_bar__buttons {
+       display: flex;
+       align-items: center;
+ 
+       .app_bar__button {
+          height: 30px;
+          width: 30px;
+ 
+          display: grid;
+          place-items: center;
+ 
+          background-color: transparent;
+          border: none;
+          outline: none;
+          color: rgba(255, 255, 255, 0.5);
+ 
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+ 
+          &:hover {
+             color: rgba(255, 255, 255, 0.8);
+          }
+       }
+    }
+ }
+ 
