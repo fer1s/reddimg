@@ -1,7 +1,7 @@
 # reddimg
 
-![GitHub](https://img.shields.io/github/license/fer1s/reddimg)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/fer1s/reddimg)
+![GitHub](https://img.shields.io/github/license/fer1s/reddimg)
 ![GitHub issues](https://img.shields.io/github/issues/fer1s/reddimg)
 
 ## Overview
